@@ -14,4 +14,4 @@ result = num1 + num2
 
 # Display the result
 st.write("The result of the addition is:", result)
-st.write("hi",st.secrets["project_id"])
+st.write("hi",st.secrets["PROJECT_ID"])
