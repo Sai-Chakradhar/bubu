@@ -53,7 +53,7 @@ from google.oauth2 import service_account
 credentials = service_account.Credentials.from_service_account_info(service_account_key_file)
 
 # Initialize a Google Cloud Storage client using the credentials
-client = storage.Client(credentials=credentials, project=st.secrets["APP"]["PROJECT_ID"])
+client = storage.Client(credentials=credentials, project=st.secrets["PROJECT_ID"])
 # Initialize a Google Cloud Storage client
 client = storage.Client()
 
