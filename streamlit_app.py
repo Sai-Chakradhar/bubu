@@ -58,7 +58,7 @@ client = storage.Client(credentials=credentials, project='midyear-arcade-425017-
 client = storage.Client()
 
 
-buckets = list(client.list_buckets())
+#buckets = list(client.list_buckets())
 
 def multiturn_generate_content(text):
     vertexai.init(project="636028894151", location="us-central1")
