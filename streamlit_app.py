@@ -2,6 +2,10 @@ import streamlit as st
 import os
 import json
 
+
+
+
+
 # Function to create a JSON file with service account credentials from st.secrets
 def create_service_account_json():
     service_account_info = {
@@ -78,3 +82,7 @@ def streamlit_app():
             y = y.to_dict()
             content = y['candidates'][0]['content']['parts'][0]['text']
             st.write(content.encode().decode('unicode_escape'))
+            
+
+if __name__ == "__main__":
+    streamlit_app()
