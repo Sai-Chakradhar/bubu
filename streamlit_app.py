@@ -64,6 +64,7 @@ def multiturn_generate_content(text):
 
 def streamlit_app():
     # Title of the webpage
+    st.write(service_account_key_file)
     st.title("Writer Project")
     
     st.subheader("Input a prompt and see it generate text in Kris Hammond's writing style")
@@ -82,7 +83,8 @@ def streamlit_app():
             y = y.to_dict()
             content = y['candidates'][0]['content']['parts'][0]['text']
             st.write(content.encode().decode('unicode_escape'))
-            
+    
+    
 
 if __name__ == "__main__":
     streamlit_app()
