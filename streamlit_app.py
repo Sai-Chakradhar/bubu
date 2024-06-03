@@ -46,10 +46,14 @@ import vertexai
 from vertexai.generative_models import GenerativeModel
 import os
 from google.cloud import storage
+from google.cloud import storage
+from google.oauth2 import service_account
 
-# Set the environment variable to point to your service account key file
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = service_account_key_file
+# Use the service account info to create credentials
+credentials = service_account.Credentials.from_service_account_info(service_account_key_file)
 
+# Initialize a Google Cloud Storage client using the credentials
+client = storage.Client(credentials=credentials, project=st.secrets["APP"]["PROJECT_ID"])
 # Initialize a Google Cloud Storage client
 client = storage.Client()
 
