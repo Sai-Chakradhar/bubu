@@ -21,9 +21,10 @@ def create_service_account_json():
         "client_x509_cert_url": st.secrets["CLIENT_X509_CERT_URL"],
         "universe_domain": st.secrets["UNIVERSE_DOMAIN"]
     }
-    with open('service_account.json', 'w') as json_file:
+    with open('/tmp/service_account.json', 'w') as json_file:
         json.dump(service_account_info, json_file)
-    return 'service_account_info'
+
+    return '/tmp/service_account.json'
 
 # Create the JSON file
 service_account_key_file = create_service_account_json()
