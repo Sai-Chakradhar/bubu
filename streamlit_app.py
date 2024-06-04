@@ -27,7 +27,11 @@ def create_service_account_json():
     return 'service_account_info'
 
 # Create the JSON file
-service_account_key_file = create_service_account_json()
+    # Set the path to your service account key file if running locally
+service_account_key_file = "service_account_info"
+
+
+#service_account_key_file = create_service_account_json()
 
 import streamlit as st
 import vertexai
@@ -46,9 +50,10 @@ client = storage.Client()
 #buckets = list(client.list_buckets())
 
 def multiturn_generate_content(text):
-    vertexai.init(project="537000417203", location="us-central1")
+
+    vertexai.init(project="363949151355", location="us-central1")
     model = GenerativeModel(
-        "projects/537000417203/locations/us-central1/endpoints/4391350485290844160",
+        "projects/363949151355/locations/us-central1/endpoints/5997868914866913280",
     )
     chat = model.start_chat()
 
