@@ -7,7 +7,7 @@ import json
 
 
 # Function to create a JSON file with service account credentials from st.secrets
-def create_service_account_json():
+def get_service_account_credentials():
     service_account_info = {
         "type": "service_account",
         "project_id": st.secrets["PROJECT_ID"],
@@ -21,17 +21,13 @@ def create_service_account_json():
         "client_x509_cert_url": st.secrets["CLIENT_X509_CERT_URL"],
         "universe_domain": st.secrets["UNIVERSE_DOMAIN"]
     }
-    with open('service_account.json', 'w') as json_file:
-        st.write("True")
-        json.dump(service_account_info, json_file)
-    return 'service_account_info'
+    credentials = service_account.Credentials.from_service_account_info(service_account_info)
+    return credentials
 
-# Create the JSON file
-    # Set the path to your service account key file if running locally
-service_account_key_file = "service_account_info"
+# Initialize a Google Cloud Storage client
+credentials = get_service_account_credentials()
+client = storage.Client(credentials=credentials)
 
-
-#service_account_key_file = create_service_account_json()
 
 import streamlit as st
 import vertexai
@@ -42,16 +38,12 @@ from google.cloud import storage
 from google.oauth2 import service_account
 
 # Set the environment variable to point to your service account key file
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = service_account_key_file
-# Initialize a Google Cloud Storage client
-client = storage.Client()
-
 
 #buckets = list(client.list_buckets())
 
 def multiturn_generate_content(text):
 
-    vertexai.init(project="363949151355", location="us-central1")
+    vertexai.init(project="363949151355", location="us-central1",credentials=credentials)
     model = GenerativeModel(
         "projects/363949151355/locations/us-central1/endpoints/5997868914866913280",
     )
@@ -70,7 +62,7 @@ def multiturn_generate_content(text):
 
 def streamlit_app():
     # Title of the webpage
-    st.write(service_account_key_file)
+    st.write(credentials)
     st.title("Writer Project")
     
     st.subheader("Input a prompt and see it generate text in Kris Hammond's writing style")
