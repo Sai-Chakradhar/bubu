@@ -21,10 +21,10 @@ def create_service_account_json():
         "client_x509_cert_url": st.secrets["CLIENT_X509_CERT_URL"],
         "universe_domain": st.secrets["UNIVERSE_DOMAIN"]
     }
-    with open('/tmp/service_account.json', 'w') as json_file:
+    with open('service_account.json', 'w') as json_file:
+        st.write("True")
         json.dump(service_account_info, json_file)
-
-    return '/tmp/service_account.json'
+    return 'service_account_info'
 
 # Create the JSON file
 service_account_key_file = create_service_account_json()
@@ -46,11 +46,12 @@ client = storage.Client()
 #buckets = list(client.list_buckets())
 
 def multiturn_generate_content(text):
-    vertexai.init(project="636028894151", location="us-central1")
+    vertexai.init(project="537000417203", location="us-central1")
     model = GenerativeModel(
-        "projects/636028894151/locations/us-central1/endpoints/1857125716848541696",
+        "projects/537000417203/locations/us-central1/endpoints/4391350485290844160",
     )
     chat = model.start_chat()
+
     generation_config = {
         "max_output_tokens": 2048,
         "temperature": 1,
