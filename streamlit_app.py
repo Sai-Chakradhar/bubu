@@ -21,7 +21,9 @@ def create_service_account_json():
         "client_x509_cert_url": st.secrets["CLIENT_X509_CERT_URL"],
         "universe_domain": st.secrets["UNIVERSE_DOMAIN"]
     }
-    return service_account_info
+    with open('service_account.json', 'w') as json_file:
+        json.dump(service_account_info, json_file)
+    return 'service_account_info'
 
 # Create the JSON file
 service_account_key_file = create_service_account_json()
@@ -34,11 +36,8 @@ from google.cloud import storage
 from google.cloud import storage
 from google.oauth2 import service_account
 
-# Use the service account info to create credentials
-credentials = service_account.Credentials.from_service_account_info(service_account_key_file)
-
-# Initialize a Google Cloud Storage client using the credentials
-client = storage.Client(credentials=credentials, project='midyear-arcade-425017-i7')
+# Set the environment variable to point to your service account key file
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = service_account_key_file
 # Initialize a Google Cloud Storage client
 client = storage.Client()
 
