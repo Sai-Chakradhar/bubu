@@ -44,6 +44,7 @@ def multiturn_generate_content(text):
             [text + " Write in the style of the person who you were finetuned on and don't talk about you. Write 300-500 words"],
             generation_config=generation_config,
         )
+        st.write(response)
         return response
     except Exception as e:
         st.error(f"Error generating content: {e}")
@@ -67,6 +68,7 @@ def streamlit_app():
         if user_input:
             response = multiturn_generate_content(user_input)
             if response:
+                st.write(response)
                 response_dict = response.to_dict()
                 content = response_dict['candidates'][0]['content']['parts'][0]['text']
                 st.write(content.encode().decode('unicode_escape'))
