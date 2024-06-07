@@ -27,12 +27,10 @@ def get_service_account_credentials():
 credentials = get_service_account_credentials()
 client = storage.Client(credentials=credentials)
 
-# The rest of your existing code...
-vertexai.init(project="537000417203", location="us-central1", credentials=credentials)
-
 def multiturn_generate_content(text):
+    vertexai.init(project="537000417203", location="us-central1")
     model = GenerativeModel(
-        "projects/537000417203/locations/us-central1/endpoints/4391350485290844160",
+    "projects/537000417203/locations/us-central1/endpoints/7732880671311396864",
     )
     chat = model.start_chat()
 
